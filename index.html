@@ -9,21 +9,23 @@
 </head>
 <body>
     <h1>SLIDERS</h1>
+    <label> Для копирования в избранное кликнуть левой кнопкой мыши </label>
 
-    <img id = "picture" src="IMG/0.jpg" alt="">
-
-    <img id = "picture2" src="IMG/1.jpg" alt="">
-    
-    <img id = "picture3" src="IMG/2.jpg" alt="">
-
-    <img id = "picture4" src="IMG/3.jpg" alt="">
-
-    <img id = "picture5" src="IMG/4.jpg" alt="">
-    
-    <img id = "picture6" src="IMG/5.jpg" alt="">
+    <div id = "polosaImg" class="location"></div>
 
     <br />
-    <button id = "left">LEFT</button>   <button id = "right">RIGHT</button>
+    <div class="location">
+    <button id = "jumpLeft">jumpLeft</button>
+    <button id = "left">LEFT</button>
+    <button id = "right">RIGHT</button>
+    <button id = "jumpRight">jumpRight</button>
+    </div>
+
+    <h3>Закладки:</h3>
+    <label> Запрашивать подтверждение перед удалением из избранного <input type="checkbox" id="podtvYdal"></label>
+
+    <div id = "safe"></div>
+
 
     <script src = "JS/script.js"></script>
 </body>

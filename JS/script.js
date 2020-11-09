@@ -1,65 +1,90 @@
-const $picture = document.getElementById('picture')
-const $picture2 = document.getElementById('picture2')
-const $picture3 = document.getElementById('picture3')
-const $picture4 = document.getElementById('picture4')
-const $picture5 = document.getElementById('picture5')
-const $picture6 = document.getElementById('picture6')
+const $polosaImg = document.getElementById('polosaImg')
+const $safe = document.getElementById('safe')
+const $podtvYdal = document.getElementById('podtvYdal')
+
+
+
+let mailPick = 'IMG/'
+document.querySelector('h1').innerHTML += ' ' + mailPick
+const tipePick = '.jpg'
+const klPict = 47
+const klImg = 6
+const sizeJump = 5
+let number = 0;
+let html = '';
+
+for(var nomImg = 0; nomImg < klImg; nomImg++) {
+    html += `<img id = "pict${nomImg}" title="${nomImg}.jpg" src="IMG/${nomImg}.jpg" alt="">`
+}
+
+html += '<br />'
+
+$polosaImg.innerHTML = html
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+const $tagsImg = document.querySelectorAll('img')
 const $left = document.getElementById('left')
 const $right = document.getElementById('right')
 
-let mailPick = 'IMG/'
-const tipePick = '.jpg'
-const klPict = 47
-let number = 0
+const $jumpLeft = document.getElementById('jumpLeft')
+const $jumpRight = document.getElementById('jumpRight')
 
+let hags;
 
-
-$left.addEventListener('click', function() {
-    number++
-
-    if(conclusion(number, $picture, 0)) 
-         console.log(number)
-
-    if(conclusion(number, $picture2, 1)) 
-        console.log(number + 1)
-
-    if(conclusion(number, $picture3, 2)) 
-        console.log(number + 2)
-
-    if(conclusion(number, $picture4, 3)) 
-        console.log(number + 3)
-
-    if(conclusion(number, $picture5, 4)) 
-        console.log(number + 4)
-
-    if(conclusion(number, $picture6, 5)) 
-        console.log(number + 5)
+$polosaImg.addEventListener('click', () => {
+    if(event.target.tagName == 'IMG')
+    $safe.insertAdjacentHTML('beforeend', `<img title="${event.target.title}" src="IMG/${event.target.title}" alt="">`)
+    console.log(event.target.title)
 })
 
-$right.addEventListener('click', function() {
+$safe.addEventListener('click', (e) => {
+    if(event.target.tagName == 'IMG')
+
+    if($podtvYdal.checked) {
+    if(confirm('Убрать из закладок'))
+    e.target.parentNode.removeChild(e.target);
+    } else {
+    e.target.parentNode.removeChild(e.target);
+    }
+})
+
+$left.addEventListener('click', () => {
+    number++
+
+    procrytka()
+})
+
+
+$right.addEventListener('click', () => {
     number--
 
     if(number < 0) number = klPict * 10 - 1
 
-    if(conclusion(number, $picture, 0)) 
-         console.log(number)
-
-    if(conclusion(number, $picture2, 1)) 
-        console.log(number + 1)
-
-    if(conclusion(number, $picture3, 2)) 
-        console.log(number + 2)
-
-    if(conclusion(number, $picture4, 3)) 
-    console.log(number + 3)
-
-    if(conclusion(number, $picture5, 4)) 
-    console.log(number + 4)
-
-    if(conclusion(number, $picture6, 5)) 
-    console.log(number + 5)
-
+    procrytka()
 })
+
+$jumpLeft.addEventListener('click', () => {
+    number += sizeJump
+
+    procrytka()
+})
+
+$jumpRight.addEventListener('click', () => {
+    number -= sizeJump
+
+    if(number < 0) number = klPict * 10 - 1
+
+    procrytka()
+})
+
+
+function procrytka() {
+
+    $tagsImg.forEach((item, hags) => conclusion(number, item, hags))
+}
+
+
 
 function conclusion(nameMyPict, $tagPict, hag) {
 
@@ -69,17 +94,17 @@ function conclusion(nameMyPict, $tagPict, hag) {
 
     img.src = mailPick + nameMyPict + tipePick
 
-    img.onload = function() {
+    img.onload = () => {
         $tagPict.setAttribute('src', (mailPick + nameMyPict + tipePick))
+        $tagPict.setAttribute('title', (nameMyPict + tipePick))
     };
 
-    img.onerror = function(){
+    img.onerror = () => {
         nameMyPict = (nameMyPict) - klPict
 
         if(nameMyPict < 0) nameMyPict *= -1
 
         $tagPict.setAttribute('src', (mailPick + nameMyPict + tipePick))
+        $tagPict.setAttribute('title', (nameMyPict + tipePick))
     };
-
-    return true
 }
